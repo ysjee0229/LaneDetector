@@ -9,7 +9,16 @@ using namespace cv;
 LaneDetector::LaneDetector()
     : nh(""), pnh("~")
 {
-    subCam = nh.subscribe("/usb_cam/image_raw", 1, &LaneDetector::Cam_CB, this);
+    pnh.getParam("demo_method", DEMOTYPE);
+    if (DEMOTYPE=="video"){
+        subCam = nh.subscribe("/usb_cam/image_raw", 1, &LaneDetector::Cam_CB, this);
+    }
+    else if (DEMOTYPE=="image") {
+        ROS_WARN("Not implemnted yet");
+    }
+    else {
+        ROS_ERROR("Wrong type : %s", DEMOTYPE);
+    }
 }
 void LaneDetector::Cam_CB(const sensor_msgs::Image::ConstPtr &msg) {
     Mat frame = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8)->image;

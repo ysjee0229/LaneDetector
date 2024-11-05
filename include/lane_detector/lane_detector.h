@@ -18,6 +18,8 @@ class LaneDetector {
     ros::NodeHandle pnh;
     ros::Subscriber subCam;
 
+    std::string DEMOTYPE;
+
     //Functions-ROS
     void Cam_CB(const sensor_msgs::Image::ConstPtr& msg);
 
