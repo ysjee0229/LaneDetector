@@ -27,6 +27,7 @@ class LaneDetector {
     void show(std::string name, cv::Mat frame, int waitkey);
 
 
+
     public:
     LaneDetector();
 
